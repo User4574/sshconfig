@@ -1,0 +1,36 @@
+h1. SSHConfig
+
+This is a gem which allows you to programatically configure your ~/.ssh/config.
+
+It's a bit bad, but it works.
+
+h2. Config file
+
+Your new file to worry about is ~/.ssh/sshconfig.
+
+h2. ssh-update-config
+
+The @ssh-update-config@ command will generate the ~/.ssh/config file for you. The file will be overwritten.
+
+h2. Directives
+
+In the block you pass to a host method, any method becomes an sshconfig directive. It's method_missing_madness!
+
+h2. It's all ruby!
+
+h3. So write ruby!
+
+Methods, loops, variables; you name it.
+
+h3. $hostlist variable
+
+The grand list of hosts is stored in @$hostlist@. It's a @Hosts@ object. You can touch this. The @hosts {}@ method appends to this list. @$hostlist.host{}@ does the same as @hosts{host{}}@.
+
+h2. Building
+
+bc.   gem build sshconfig.gemspec
+  gem install --user-install sshconfig
+
+h2. Example
+
+There's an example file, take a look.
