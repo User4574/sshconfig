@@ -1,8 +1,31 @@
 #!/usr/bin/env ruby
+
+require 'optparse'
 require 'sshconfig'
 include SSHConfig
 
-File.open(File.join(ENV["HOME"], ".ssh/config"), "w") do |f|
-  load File.join(ENV["HOME"], ".ssh/sshconfig")
-  f.puts $hostlist
+output = $stdout
+input = File.join(ENV["HOME"], ".ssh/sshconfig")
+
+parser = OptionParser.new do |opts|
+  opts.banner = "Usage: ssh-update-config"
+  opts.on("-h", "--help", "--usage", "Print usage") do
+    puts parser.banner
+    puts parser.summarize
+    exit 0
+  end
+  opts.on("-o MANDATORY", "--output MANDATORY", "Output destination (default: stdout)") do |out|
+    output = File.open(out, "w")
+  end
+  opts.on("-i MANDATORY", "--input MANDATORY", "Input source (default: ~/.ssh/sshconfig") do |inp|
+    input = inp
+  end
+  opts.on("-l MANDATORY", "--load MANDATORY", "Load an SSHConfig extension") do |ext|
+    require ext
+  end
 end
+parser.parse!
+
+load input
+output.puts $hostlist
+output.flush

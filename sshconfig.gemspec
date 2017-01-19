@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = 'sshconfig'
-  s.version     = '12'
+  s.version     = '13'
   s.date        = '2017-01-11'
   s.summary     = "SSH Config DSL"
   s.description = "A DSL to generate SSH config"
