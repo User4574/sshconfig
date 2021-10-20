@@ -7,7 +7,7 @@ module SSHConfig
 
   $hostlist = Hosts.new{}
 
-  def hosts
-    $hostlist.merge(Hosts.new(&Proc.new))
+  def hosts(&blk)
+    $hostlist.merge(Hosts.new(&blk))
   end
 end

@@ -11,8 +11,8 @@ module SSHConfig
       @hosts += morehosts.hosts
     end
 
-    def host(name)
-      @hosts << Host.new(name, &Proc.new)
+    def host(name, &blk)
+      @hosts << Host.new(name, &blk)
     end
 
     def to_s
